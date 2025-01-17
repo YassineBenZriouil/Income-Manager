@@ -72,7 +72,8 @@ const Home = () => {
                     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
                         <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
                             <p className="text-lg text-gray-800 dark:text-gray-200 mb-4">
-                                Are you sure you want to reset?
+                                Are you sure you want to reset? This will clear
+                                all your data.
                             </p>
                             <div className="flex justify-end space-x-4">
                                 <button
@@ -93,74 +94,93 @@ const Home = () => {
                 )}
                 <div className="text-center mb-8">
                     <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-200">
-                        Hello {name}
+                        Hello {name} 👋
                     </h1>
-                    <h2 className="text-xl text-gray-700 dark:text-gray-300">
+                    <h2 className="text-xl text-gray-700 dark:text-gray-300 mt-2">
                         Your current balance is{" "}
                         <span className="font-semibold">
                             ${balance.toFixed(2)}
                         </span>
                     </h2>
                     <p className="text-gray-600 dark:text-gray-400 mt-2">
-                        Total Income Today:{" "}
+                        💰 Total Income Today:{" "}
                         <span className="font-semibold">
                             ${totalIncome.toFixed(2)}
                         </span>
                     </p>
                     <p className="text-gray-600 dark:text-gray-400 mt-2">
-                        Total Spent Today:{" "}
+                        💸 Total Spent Today:{" "}
                         <span className="font-semibold">
                             ${totalSpent.toFixed(2)}
                         </span>
                     </p>
                 </div>
                 <div className="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md mb-8">
-                    <div className="flex space-x-4">
-                        <input
-                            type="number"
-                            placeholder="Enter amount"
-                            value={amount}
-                            onChange={(e) =>
-                                setAmount(parseFloat(e.target.value))
-                            }
-                            className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-800 dark:text-white"
-                        />
-                        <select
-                            value={category}
-                            onChange={(e) => setCategory(e.target.value)}
-                            className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-800 dark:text-white"
-                        >
-                            <option value="" disabled>
-                                Select a category
-                            </option>
-                            <option value="Food">Food</option>
-                            <option value="Transport">Transport</option>
-                            <option value="Entertainment">Entertainment</option>
-                            <option value="Salary">Salary</option>
-                            <option value="Other">Other</option>
-                        </select>
+                    <div className="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
+                        <div className="w-full sm:flex-1">
+                            <input
+                                type="number"
+                                placeholder="Enter amount"
+                                value={amount}
+                                onChange={(e) =>
+                                    setAmount(parseFloat(e.target.value))
+                                }
+                                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-800 dark:text-white"
+                            />
+                            <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                                Enter the amount you want to add or subtract.
+                            </p>
+                        </div>
+                        <div className="w-full sm:flex-1">
+                            <select
+                                value={category}
+                                onChange={(e) => setCategory(e.target.value)}
+                                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-800 dark:text-white"
+                            >
+                                <option value="" disabled>
+                                    Select a category
+                                </option>
+                                <option value="Food">Food</option>
+                                <option value="Transport">Transport</option>
+                                <option value="Entertainment">
+                                    Entertainment
+                                </option>
+                                <option value="Salary">Salary</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                                Choose a category for this transaction.
+                            </p>
+                        </div>
                     </div>
                     <div className="flex space-x-4 mt-4">
                         <button
                             onClick={handleAdd}
                             className="flex-1 bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
                         >
-                            Income
+                            Add Income 💵
                         </button>
                         <button
                             onClick={handleSubtract}
                             className="flex-1 bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500"
                         >
-                            Spent
+                            Add Expense 💸
                         </button>
                     </div>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+                        💡 Tip: Use the buttons above to add income or expenses.
+                    </p>
                 </div>
                 <HistoryTable history={history} />
                 <div className="mt-8 bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md">
                     <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-4">
-                        Expense/Income Distribution
+                        Expense/Income Distribution 📊
                     </h3>
                     <PieChart history={history} />
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+                        This chart shows how your income and expenses are
+                        distributed across categories.
+                    </p>
                 </div>
             </div>
         </div>
