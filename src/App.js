@@ -8,7 +8,6 @@ import "react-toastify/dist/ReactToastify.css";
 import "./style/global.css";
 
 import Home from "./components/home";
-import Header from "./static/header";
 import Form from "./components/form";
 
 function App() {

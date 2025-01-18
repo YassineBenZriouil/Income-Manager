@@ -1,4 +1,3 @@
-// src/redux/slice.js
 import { createSlice } from "@reduxjs/toolkit";
 
 const userSlice = createSlice({
@@ -7,6 +6,7 @@ const userSlice = createSlice({
         name: "",
         balance: 0,
         history: [],
+        currencies: [], // Add currencies to the initial state
     },
     reducers: {
         setUser: (state, action) => {
@@ -38,10 +38,18 @@ const userSlice = createSlice({
             state.balance = 0;
             state.history = [];
         },
+        setCurrencies: (state, action) => {
+            state.currencies = action.payload; // Add a reducer to set currencies
+        },
     },
 });
 
-export const { setUser, addToBalance, subtractFromBalance, resetUser } =
-    userSlice.actions;
+export const {
+    setUser,
+    addToBalance,
+    subtractFromBalance,
+    resetUser,
+    setCurrencies,
+} = userSlice.actions;
 
 export default userSlice.reducer;

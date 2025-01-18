@@ -1,4 +1,3 @@
-// src/utils/currencyAPI.js
 const API_KEY = "439d1088478b7dc4da122e28d5fa427e"; // Replace with your CurrencyLayer API key
 const BASE_URL = "https://api.currencylayer.com/live";
 
@@ -9,33 +8,39 @@ const BASE_URL = "https://api.currencylayer.com/live";
  */
 export const fetchExchangeRate = async (currency) => {
     try {
-        console.log("Fetching exchange rate for:", currency);
         const response = await fetch(`${BASE_URL}?access_key=${API_KEY}`);
-        console.log("Raw response:", response);
-
-        if (!response.ok) {
-            throw new Error(
-                `Network response was not ok: ${response.statusText}`
-            );
-        }
+        if (!response.ok)
+            throw new Error(`Network error: ${response.statusText}`);
 
         const data = await response.json();
-        console.log("Response JSON:", data);
+        if (!data.success) throw new Error(data.error.info);
 
-        if (!data.success) {
-            console.error("API Error Info:", data.error);
-            throw new Error(data.error.info);
-        }
+        const rate = data.quotes[`USD${currency}`];
+        if (!rate) throw new Error(`Rate for ${currency} not found.`);
 
-        const rate = data.quotes[`USD${currency}`]; // Get the rate for the selected currency
-        if (!rate) {
-            throw new Error(`Exchange rate for ${currency} not found.`);
-        }
-
-        console.log("Exchange rate fetched successfully:", rate);
         return rate;
     } catch (error) {
         console.error("Error fetching exchange rate:", error);
+        return null;
+    }
+};
+
+/**
+ * Fetches all available currencies.
+ * @returns {Promise<string[]>} - An array of currency codes (e.g., ["USD", "EUR", "GBP"]).
+ */
+export const allTheCurrenciesExtentions = async () => {
+    try {
+        const response = await fetch(`${BASE_URL}?access_key=${API_KEY}`);
+        if (!response.ok)
+            throw new Error(`Network error: ${response.statusText}`);
+
+        const data = await response.json();
+        if (!data.success) throw new Error(data.error.info);
+
+        return Object.keys(data.quotes).map((key) => key.replace("USD", "")); // Remove "USD" prefix
+    } catch (error) {
+        console.error("Error fetching currencies:", error);
         return null;
     }
 };
