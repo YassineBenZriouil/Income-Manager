@@ -1,6 +1,6 @@
 // src/utils/currencyAPI.js
 const API_KEY = "439d1088478b7dc4da122e28d5fa427e"; // Replace with your CurrencyLayer API key
-const BASE_URL = "http://api.currencylayer.com/live";
+const BASE_URL = "https://api.currencylayer.com/live";
 
 /**
  * Fetches the exchange rate for the selected currency.
